@@ -39,6 +39,17 @@ class Graph:
             print(current)
             current = current.get_next()
 
+    def find_second_level_conn(self, d):
+        current = self.find(d)
+        con = current.edges
+        while con is not None:
+            edge = con.connection.edges
+            while edge is not None:
+                if edge.connection.data != current.data:
+                    print(edge.connection.data)
+                edge = edge.next
+            con = con.next
+
 
 class Vertex:
     def __init__(self, data):
@@ -97,3 +108,6 @@ if __name__ == '__main__':
     social.connect("G", "D", 58)
     social.connect("D", "C", 27)
     social.display()
+
+    social.find_second_level_conn('B')
+    social.find_second_level_conn('G')
